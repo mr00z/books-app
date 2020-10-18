@@ -1,11 +1,20 @@
 <script lang="ts">
   import 'halfmoon/css/halfmoon-variables.min.css';
-  import Navbar from './Navbar.svelte';
-  let name: string = 'World';
+  import ContentWrapper from './halfmoon/BuildingBlocks/Containers/ContentWrapper.svelte';
+  import PageWrapper from './halfmoon/BuildingBlocks/Containers/PageWrapper.svelte';
+  import Navigation from './components/Navigation/Navigation.svelte';
+  import Container from './halfmoon/BuildingBlocks/Containers/Container.svelte';
+  import Row from './halfmoon/BuildingBlocks/Grid/Row.svelte';
+  import Col from './halfmoon/BuildingBlocks/Grid/Col.svelte';
 </script>
 
-<div class="page-wrapper with-navbar">
-  <!-- Content wrapper -->
-  <Navbar />
-  <main class="content-wrapper">Hello {name}</main>
-</div>
+<PageWrapper withNavbar>
+  <Navigation />
+  <ContentWrapper>
+    <Container>
+      <Row>
+        <Col />
+      </Row>
+    </Container>
+  </ContentWrapper>
+</PageWrapper>
