@@ -1,11 +1,12 @@
 <script lang="ts">
-  type BreakpointType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'auto';
+  import { mergeClassNames } from '../../../utilities';
 
-  export let all: BreakpointType = undefined;
-  export let sm: BreakpointType = undefined;
-  export let md: BreakpointType = undefined;
-  export let lg: BreakpointType = undefined;
-  export let xl: BreakpointType = undefined;
+  export let all: ColWidth = undefined;
+  export let sm: ColWidth = undefined;
+  export let md: ColWidth = undefined;
+  export let lg: ColWidth = undefined;
+  export let xl: ColWidth = undefined;
+  export let className: string = undefined;
 
   function getClassName() {
     if (!all && !sm && !md && !lg && !xl) return 'col';
@@ -22,6 +23,6 @@
   }
 </script>
 
-<div class={getClassName()}>
+<div class={mergeClassNames(getClassName(), className)}>
   <slot />
 </div>

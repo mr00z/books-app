@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <ul class="navbar-nav d-none d-md-flex">
+  <ul class="navbar-nav">
     <slot />
   </ul>
 </nav>

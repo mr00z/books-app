@@ -1,7 +1,20 @@
 <script lang="ts">
+  import { mergeClassNames } from '../../../utilities';
   export let className: string = undefined;
+  export let equalSpacing: boolean = false;
+  export let equalSpacingBreakpoint: Breakpoint;
+
+  function getEqualSpacingClass() {
+    let eqSpacingClass = '';
+
+    if (equalSpacing) eqSpacingClass = 'row-equal-spacing';
+
+    if (equalSpacingBreakpoint) eqSpacingClass = `${eqSpacingClass}-${equalSpacingBreakpoint}`;
+
+    return eqSpacingClass;
+  }
 </script>
 
-<div class="row {className}">
+<div class={mergeClassNames('row', className, getEqualSpacingClass())}>
   <slot />
 </div>
