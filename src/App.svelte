@@ -5,6 +5,12 @@
   import Navigation from './components/Navigation/Navigation.svelte';
   import Container from './halfmoon/BuildingBlocks/Containers/Container.svelte';
   import Tasks from './views/Tasks.svelte';
+  import { onMount } from 'svelte';
+  import { setPreferredTheme } from './utils/themeHelper';
+
+  onMount(() => {
+    setPreferredTheme();
+  });
 </script>
 
 <PageWrapper withNavbar>
