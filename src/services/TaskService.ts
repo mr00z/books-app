@@ -1,7 +1,8 @@
 import type TaskModel from '../models/Task/TaskModel';
 
 export function getAllTasks(): TaskModel[] {
-  return JSON.parse(localStorage.getItem('tasks'));
+  const tasks = localStorage.getItem('tasks');
+  return tasks ? JSON.parse(tasks) : [];
 }
 
 export function addtask(task: TaskModel): void {

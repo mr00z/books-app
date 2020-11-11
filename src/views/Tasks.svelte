@@ -2,15 +2,30 @@
   import { onMount } from 'svelte';
   import Task from '../components/Task/Task.svelte';
   import { getAllTasks } from '../services/TaskService';
-  import type TaskModel from '../models/Task/TaskModel';
+  import TaskModel from '../models/Task/TaskModel';
+  import Button from '../halfmoon/BasicElements/Button.svelte';
+  import Row from '../halfmoon/BuildingBlocks/Grid/Row.svelte';
+  import Col from '../halfmoon/BuildingBlocks/Grid/Col.svelte';
 
   let tasks: TaskModel[] = [];
 
   onMount(() => {
     tasks = getAllTasks();
   });
+
+  function handleAddTask() {
+    const task = new TaskModel();
+    tasks = [...tasks, task];
+  }
 </script>
 
-{#each tasks as task}
-  <Task taskData={task} />
-{/each}
+<div>
+  <Row className="mt-5">
+    <Col>
+      <Button onClick={handleAddTask} block>Add task</Button>
+    </Col>
+  </Row>
+  {#each tasks as task}
+    <Task taskData={task} editable={!task.name} />
+  {/each}
+</div>

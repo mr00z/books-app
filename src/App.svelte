@@ -1,5 +1,5 @@
 <script lang="ts">
-  import 'halfmoon/css/halfmoon-variables.min.css';
+  import 'halfmoon/css/halfmoon.css';
   import ContentWrapper from './halfmoon/BuildingBlocks/Containers/ContentWrapper.svelte';
   import PageWrapper from './halfmoon/BuildingBlocks/Containers/PageWrapper.svelte';
   import Navigation from './components/Navigation/Navigation.svelte';
