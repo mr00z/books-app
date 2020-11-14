@@ -1,23 +1,34 @@
 <script lang="ts">
   import Button from '../../halfmoon/BasicElements/Button.svelte';
   import Card from '../../halfmoon/BuildingBlocks/Content/Card.svelte';
-  import Input from '../../halfmoon/FormElements/Input.svelte';
-  import Textarea from '../../halfmoon/FormElements/Textarea.svelte';
   import type TaskModel from '../../models/Task/TaskModel';
+  import { addtask } from '../../services/TaskService';
 
   export let taskData: TaskModel;
   export let editable: boolean = false;
+  export let onSave: () => void = undefined;
+
+  let { name, description } = taskData;
+
+  function saveTask() {
+    if (description && name) {
+      addtask({ name, description } as TaskModel);
+      editable = false;
+      onSave();
+    }
+  }
+  const formControlClasses = 'form-control form-control-lg';
 </script>
 
 {#if editable}
   <Card>
-    <Input type="text" placeholder="Title" className="w-half" size="large" value={taskData?.name} />
-    <Textarea className="my-5 w-full" placeholder="Description" size="large" value={taskData?.description} />
-    <Button type="success">Save</Button>
+    <input type="text" placeholder="Title" class={`${formControlClasses} w-half`} bind:value={name} />
+    <textarea class={`${formControlClasses} my-5 w-full`} placeholder="Description" bind:value={description} />
+    <Button type="success" onClick={saveTask}>Save</Button>
   </Card>
 {:else}
   <Card>
-    <h2 name="title">{taskData?.name}</h2>
-    <p>{taskData?.description}</p>
+    <h2 name="title">{name}</h2>
+    <p>{description}</p>
   </Card>
 {/if}

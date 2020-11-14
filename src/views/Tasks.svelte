@@ -9,8 +9,11 @@
 
   let tasks: TaskModel[] = [];
 
-  onMount(() => {
+  function fetchTasks() {
     tasks = getAllTasks();
+  }
+  onMount(() => {
+    fetchTasks();
   });
 
   function handleAddTask() {
@@ -26,6 +29,6 @@
     </Col>
   </Row>
   {#each tasks as task}
-    <Task taskData={task} editable={!task.name} />
+    <Task taskData={task} editable={!task.name} onSave={fetchTasks} />
   {/each}
 </div>
