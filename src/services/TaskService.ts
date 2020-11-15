@@ -1,14 +1,16 @@
-import type TaskModel from '../models/Task/TaskModel';
+import type TaskModel from '../models/Task/Task';
+import type { TaskTypes } from '../models/Task/TaskTypes';
 
-export function getAllTasks(): TaskModel[] {
-  const tasks = localStorage.getItem('tasks');
+export function getAllTasks(tasksType: TaskTypes): TaskModel[] {
+  const tasks = localStorage.getItem(`tasks.${tasksType}`);
   return tasks ? JSON.parse(tasks) : [];
 }
 
 export function addtask(task: TaskModel): void {
-  const currentTasks = getAllTasks();
+  if (!task) return;
+  const currentTasks = getAllTasks(task.taskType);
 
   currentTasks.push(task);
 
-  localStorage.setItem('tasks', JSON.stringify(currentTasks));
+  localStorage.setItem(`tasks.${task.taskType}`, JSON.stringify(currentTasks));
 }

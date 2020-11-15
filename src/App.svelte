@@ -3,7 +3,6 @@
   import ContentWrapper from './halfmoon/BuildingBlocks/Containers/ContentWrapper.svelte';
   import PageWrapper from './halfmoon/BuildingBlocks/Containers/PageWrapper.svelte';
   import Navigation from './components/Navigation/Navigation.svelte';
-  import Container from './halfmoon/BuildingBlocks/Containers/Container.svelte';
   import Tasks from './views/Tasks.svelte';
   import { onMount } from 'svelte';
   import { setPreferredTheme } from './utils/themeHelper';
@@ -16,8 +15,6 @@
 <PageWrapper withNavbar>
   <Navigation />
   <ContentWrapper>
-    <Container>
-      <Tasks />
-    </Container>
+    <Tasks />
   </ContentWrapper>
 </PageWrapper>

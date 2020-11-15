@@ -7,3 +7,17 @@ export function mergeClassNames(...classes: string[]): string {
 
   return className.trim();
 }
+
+export function convertEnumIdentifier(identifier: string): string {
+  if (!identifier) return;
+  const words = identifier.toLowerCase().split('_');
+
+  let result = '';
+
+  words.forEach((word) => {
+    const wordCapitalized = word.charAt(0).toUpperCase().concat(word.substr(1));
+    result = result.concat(' ', wordCapitalized);
+  });
+
+  return result.trim();
+}

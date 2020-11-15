@@ -6,6 +6,7 @@
   export let md: ColWidth = undefined;
   export let lg: ColWidth = undefined;
   export let xl: ColWidth = undefined;
+  export let offset: { breakpoint?: Breakpoint; value: ColOffsetValue } = undefined;
   export let className: string = undefined;
 
   function getClassName() {
@@ -18,6 +19,12 @@
     if (md) className += ` col-md-${md}`;
     if (lg) className += ` col-lg-${lg}`;
     if (xl) className += ` col-xl-${xl}`;
+
+    if (offset) {
+      const { breakpoint, value } = offset;
+      if (breakpoint) className += `offset-${breakpoint}-${value}`;
+      else className += `offset-${value}`;
+    }
 
     return className.trimStart();
   }

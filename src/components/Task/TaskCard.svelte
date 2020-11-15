@@ -1,20 +1,21 @@
 <script lang="ts">
   import Button from '../../halfmoon/BasicElements/Button.svelte';
   import Card from '../../halfmoon/BuildingBlocks/Content/Card.svelte';
-  import type TaskModel from '../../models/Task/TaskModel';
+  import type TaskModel from '../../models/Task/Task';
   import { addtask } from '../../services/TaskService';
 
   export let taskData: TaskModel;
   export let editable: boolean = false;
   export let onSave: () => void = undefined;
 
-  let { name, description } = taskData;
+  let { name, description, taskType } = taskData;
 
   function saveTask() {
     if (description && name) {
-      addtask({ name, description } as TaskModel);
+      addtask({ name, description, taskType } as TaskModel);
       editable = false;
-      onSave();
+
+      if (onSave) onSave();
     }
   }
   const formControlClasses = 'form-control form-control-lg';
