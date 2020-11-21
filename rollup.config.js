@@ -5,7 +5,8 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import css from 'rollup-plugin-css-only';
+import scss from 'rollup-plugin-scss';
+import sass from 'sass';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,7 +41,9 @@ export default {
   },
   plugins: [
     typescript({ sourceMap: !production }),
-    css({ output: 'public/build/halfmoon.css' }),
+    scss({
+      sass,
+    }),
     svelte({
       preprocess: sveltePreprocess({
         sourceMap: !production,
