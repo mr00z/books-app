@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mergeClassNames } from '../../../utilities';
+  import { mergeClassNames } from '../../../utils/utils';
 
   export let all: ColWidth = undefined;
   export let sm: ColWidth = undefined;

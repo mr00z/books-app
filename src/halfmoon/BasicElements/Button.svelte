@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mergeClassNames } from '../../utilities';
+  import { mergeClassNames } from '../../utils/utils';
 
   export let className: string = undefined;
   export let type: ColorType = undefined;

@@ -3,7 +3,7 @@
   import TaskColumnSeparator from '../components/Task/TaskColumnSeparator.svelte';
   import Col from '../halfmoon/BuildingBlocks/Grid/Col.svelte';
   import Row from '../halfmoon/BuildingBlocks/Grid/Row.svelte';
-  import { TaskTypes } from '../models/Task/TaskTypes';
+  import { TaskType } from '../models/Task/TaskType';
 </script>
 
 <style lang="scss">
@@ -14,14 +14,14 @@
 
 <Row className="full-height">
   <Col sm={12} lg={3} className="mx-auto">
-    <TaskColumn tasksType={TaskTypes.TO_DO} />
+    <TaskColumn tasksType={TaskType.TO_DO} />
   </Col>
   <TaskColumnSeparator />
   <Col sm={12} lg={3} className="mx-auto">
-    <TaskColumn tasksType={TaskTypes.IN_PROGRESS} />
+    <TaskColumn tasksType={TaskType.IN_PROGRESS} />
   </Col>
   <TaskColumnSeparator />
   <Col sm={12} lg={3} className="mx-auto">
-    <TaskColumn tasksType={TaskTypes.DONE} />
+    <TaskColumn tasksType={TaskType.DONE} />
   </Col>
 </Row>

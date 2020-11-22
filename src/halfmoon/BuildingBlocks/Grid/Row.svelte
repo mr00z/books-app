@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mergeClassNames } from '../../../utilities';
+  import { mergeClassNames } from '../../../utils/utils';
   export let className: string = undefined;
   export let equalSpacing: boolean = false;
   export let equalSpacingBreakpoint: Breakpoint;

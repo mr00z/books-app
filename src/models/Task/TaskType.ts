@@ -1,4 +1,4 @@
-export enum TaskTypes {
+export enum TaskType {
   TO_DO = 'TO_DO',
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
