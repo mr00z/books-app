@@ -8,7 +8,7 @@ export function mergeClassNames(...classes: string[]): string {
   return className.trim();
 }
 
-export function convertEnumIdentifier(identifier: string): string {
+export function convertEnumIdentifierToWords(identifier: string): string {
   if (!identifier) return;
   const words = identifier.toLowerCase().split('_');
 

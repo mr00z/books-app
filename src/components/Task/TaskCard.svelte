@@ -4,17 +4,16 @@
 
   import Button from '../../halfmoon/BasicElements/Button.svelte';
   import Card from '../../halfmoon/BuildingBlocks/Content/Card.svelte';
-  import Task from '../../models/Task/Task';
-  import { addtask, editTask } from '../../services/TaskService';
+  import type Task from '../../models/Task/Task';
+  import { taskStore } from '../../store/tasksStore';
+  import { saveAllTasks } from '../../services/TaskService';
 
   export let taskData: Task;
-  export let onSave: () => void = undefined;
 
-  let editable = !taskData?.id;
+  let isNew = !taskData?.name && !taskData?.description;
+  let editable = isNew;
 
   let { id, name, description, taskType } = taskData;
-
-  $: id = taskData.id;
 
   function handleEditButtonClick() {
     editable = true;
@@ -22,18 +21,17 @@
 
   function handleCancelButtonClick() {
     editable = false;
-    onSave();
+    if (isNew) taskStore.undoAddTask(taskType);
   }
 
   function handleSaveButtonClick() {
     if (!name) return;
 
-    if (!id) addtask(new Task(name, description, taskType));
-    else editTask(taskData);
+    taskStore.editTask({ id, name, description, taskType });
 
     editable = false;
 
-    if (onSave) onSave();
+    saveAllTasks($taskStore); // TODO: find other place to call that
   }
   const formControlClasses = 'form-control form-control-lg';
 </script>

@@ -1,9 +1,18 @@
 <script>
+  import { onMount } from 'svelte';
+
   import TaskColumn from '../components/Task/TaskColumn.svelte';
   import TaskColumnSeparator from '../components/Task/TaskColumnSeparator.svelte';
   import Col from '../halfmoon/BuildingBlocks/Grid/Col.svelte';
   import Row from '../halfmoon/BuildingBlocks/Grid/Row.svelte';
   import { TaskType } from '../models/Task/TaskType';
+  import { getAllTasks, saveAllTasks } from '../services/TaskService';
+  import { taskStore } from '../store/tasksStore';
+
+  onMount(() => {
+    const allTasks = getAllTasks();
+    taskStore.init(allTasks);
+  });
 </script>
 
 <style lang="scss">
