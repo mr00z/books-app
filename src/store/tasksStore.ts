@@ -63,6 +63,20 @@ function createTasks() {
     });
   };
 
+  const removeTask = (task: Task) => {
+    update((tasks) => {
+      const { taskType } = task;
+      let previousTasks = tasks[taskType];
+
+      previousTasks = previousTasks.filter((t) => t.id !== task.id);
+
+      return {
+        ...tasks,
+        [taskType]: previousTasks,
+      };
+    });
+  };
+
   return {
     subscribe,
     init,
@@ -71,6 +85,7 @@ function createTasks() {
     set,
     undoAddTask,
     moveTask,
+    removeTask,
   };
 }
 

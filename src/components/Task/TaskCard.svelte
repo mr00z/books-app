@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from 'fa-svelte';
-  import { faEdit } from '@fortawesome/free-regular-svg-icons';
+  import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
   import Button from '../../halfmoon/BasicElements/Button.svelte';
   import Card from '../../halfmoon/BuildingBlocks/Content/Card.svelte';
@@ -23,6 +23,10 @@
     editable = true;
   }
 
+  function handleRemoveTask() {
+    taskStore.removeTask(taskData);
+  }
+
   function handleCancelButtonClick() {
     editable = false;
     if (isNew) taskStore.undoAddTask(taskData.taskType);
@@ -36,8 +40,6 @@
 
     editable = false;
     isNew = false;
-
-    saveAllTasks($taskStore); // TODO: find other place to call that
   }
   const formControlClasses = 'form-control';
 
@@ -88,9 +90,15 @@
   </Card>
 {:else}
   <Card className="task-card">
-    <Button className="float-right" title="Edit task" onClick={handleEditButtonClick}>
-      <Icon icon={faEdit} />
-    </Button>
+    <div class="d-flex flex-column float-right">
+      <Button title="Edit task" onClick={handleEditButtonClick}>
+        <Icon icon={faEdit} />
+      </Button>
+      <Button className="mt-5" title="Remove task" onClick={handleRemoveTask}>
+        <Icon icon={faTrashAlt} />
+      </Button>
+    </div>
+
     <h4 class="card-title" name="title">{taskData.name}</h4>
     <p>{taskData.description}</p>
   </Card>
