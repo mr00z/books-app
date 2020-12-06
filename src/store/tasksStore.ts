@@ -48,6 +48,21 @@ function createTasks() {
     });
   };
 
+  const moveTask = (task: Task, previousType: TaskType) => {
+    update((tasks) => {
+      const currentType = task.taskType;
+      let previousTasks = tasks[previousType];
+
+      previousTasks = previousTasks.filter((t) => t.id !== task.id);
+
+      return {
+        ...tasks,
+        [previousType]: previousTasks,
+        [currentType]: [...tasks[currentType], task],
+      };
+    });
+  };
+
   return {
     subscribe,
     init,
@@ -55,6 +70,7 @@ function createTasks() {
     editTask,
     set,
     undoAddTask,
+    moveTask,
   };
 }
 

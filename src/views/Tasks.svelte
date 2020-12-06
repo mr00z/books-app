@@ -6,7 +6,7 @@
   import Col from '../halfmoon/BuildingBlocks/Grid/Col.svelte';
   import Row from '../halfmoon/BuildingBlocks/Grid/Row.svelte';
   import { TaskType } from '../models/Task/TaskType';
-  import { getAllTasks, saveAllTasks } from '../services/TaskService';
+  import { getAllTasks } from '../services/TaskService';
   import { taskStore } from '../store/tasksStore';
 
   onMount(() => {

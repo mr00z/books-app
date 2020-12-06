@@ -2,7 +2,7 @@
   import { mergeClassNames } from '../../../utils/utils';
   export let className: string = undefined;
   export let equalSpacing: boolean = false;
-  export let equalSpacingBreakpoint: Breakpoint;
+  export let equalSpacingBreakpoint: Breakpoint = undefined;
 
   function getEqualSpacingClass() {
     let eqSpacingClass = '';

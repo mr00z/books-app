@@ -10,7 +10,7 @@
 
   export let tasksType: TaskType;
 
-  let tasks: Task[];
+  let tasks: Task[] = [];
 
   $: tasks = $taskStore[tasksType];
 
@@ -27,7 +27,7 @@
       <Button onClick={handleAddTask} block>Add task</Button>
     </Col>
   </Row>
-  {#each tasks as task}
+  {#each tasks as task (task.id)}
     <TaskCard taskData={task} />
   {/each}
 </section>
