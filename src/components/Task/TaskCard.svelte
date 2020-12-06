@@ -6,7 +6,6 @@
   import Card from '../../halfmoon/BuildingBlocks/Content/Card.svelte';
   import type Task from '../../models/Task/Task';
   import { taskStore } from '../../store/tasksStore';
-  import { saveAllTasks } from '../../services/TaskService';
   import { TaskType } from '../../models/Task/TaskType';
   import { convertEnumIdentifierToWords } from '../../utils/utils';
 
