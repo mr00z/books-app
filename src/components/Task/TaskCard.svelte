@@ -83,7 +83,7 @@
       </div>
     {/if}
 
-    <Button type="success" onClick={handleSaveButtonClick}>Save</Button>
+    <Button type="success" disabled={!taskData.name} onClick={handleSaveButtonClick}>Save</Button>
     <Button type="danger" onClick={handleCancelButtonClick}>Cancel</Button>
   </Card>
 {:else}
