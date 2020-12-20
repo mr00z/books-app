@@ -18,7 +18,7 @@ function createTasks() {
   const addTask = (task: Task) => {
     update((tasks) => ({
       ...tasks,
-      [task.taskType]: [...tasks[task.taskType], task],
+      [task.taskType]: [task, ...tasks[task.taskType]],
     }));
   };
 
@@ -39,7 +39,7 @@ function createTasks() {
   const undoAddTask = (taskType: TaskType) => {
     update((tasks) => {
       const currentTasks = tasks[taskType];
-      currentTasks.pop();
+      currentTasks.shift();
 
       return {
         ...tasks,
