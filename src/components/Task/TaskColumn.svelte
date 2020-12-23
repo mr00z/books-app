@@ -28,6 +28,8 @@
     </Col>
   </Row>
   {#each tasks as task (task.id)}
-    <TaskCard taskData={task} />
+    {#if !task.archived}
+      <TaskCard taskData={task} />
+    {/if}
   {/each}
 </section>

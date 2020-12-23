@@ -1,13 +1,17 @@
 <script lang="ts">
-  import Icon from 'fa-svelte';
-  import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+  import Icon from "fa-svelte";
+  import {
+    faEdit,
+    faTrashAlt,
+    faFolder,
+  } from "@fortawesome/free-regular-svg-icons";
 
-  import Button from '../../halfmoon/BasicElements/Button.svelte';
-  import Card from '../../halfmoon/BuildingBlocks/Content/Card.svelte';
-  import type Task from '../../models/Task/Task';
-  import { taskStore } from '../../store/tasksStore';
-  import { TaskType } from '../../models/Task/TaskType';
-  import { convertEnumIdentifierToWords } from '../../utils/utils';
+  import Button from "../../halfmoon/BasicElements/Button.svelte";
+  import Card from "../../halfmoon/BuildingBlocks/Content/Card.svelte";
+  import type Task from "../../models/Task/Task";
+  import { taskStore } from "../../store/tasksStore";
+  import { TaskType } from "../../models/Task/TaskType";
+  import { convertEnumIdentifierToWords } from "../../utils/utils";
 
   export let taskData: Task;
 
@@ -26,6 +30,10 @@
     taskStore.removeTask(taskData);
   }
 
+  function handleArchiveTask() {
+    taskStore.editTask({ ...taskData, archived: true });
+  }
+
   function handleCancelButtonClick() {
     editable = false;
     if (isNew) taskStore.undoAddTask(taskData.taskType);
@@ -34,13 +42,14 @@
   function handleSaveButtonClick() {
     if (!taskData.name) return;
 
-    if (initialType !== taskData.taskType.toString()) taskStore.moveTask(taskData, TaskType[initialType]);
+    if (initialType !== taskData.taskType.toString())
+      taskStore.moveTask(taskData, TaskType[initialType]);
     else taskStore.editTask(taskData);
 
     editable = false;
     isNew = false;
   }
-  const formControlClasses = 'form-control';
+  const formControlClasses = "form-control";
 
   const allTaskTypes = Object.keys(TaskType);
 </script>
@@ -76,7 +85,10 @@
     {#if !isNew}
       <div class="form-group my-5">
         <label for={`task_${id}_status`}>Status</label>
-        <select id={`task_${id}_status`} class={`${formControlClasses} w-full`} bind:value={taskData.taskType}>
+        <select
+          id={`task_${id}_status`}
+          class={`${formControlClasses} w-full`}
+          bind:value={taskData.taskType}>
           {#each allTaskTypes as t}
             <option value={t}>{convertEnumIdentifierToWords(t)}</option>
           {/each}
@@ -84,21 +96,36 @@
       </div>
     {/if}
 
-    <Button type="success" disabled={!taskData.name} onClick={handleSaveButtonClick}>Save</Button>
+    <Button
+      type="success"
+      disabled={!taskData.name}
+      onClick={handleSaveButtonClick}>
+      Save
+    </Button>
     <Button type="danger" onClick={handleCancelButtonClick}>Cancel</Button>
   </Card>
 {:else}
-  <Card className="task-card">
-    <div class="d-flex flex-column float-right">
-      <Button title="Edit task" onClick={handleEditButtonClick}>
-        <Icon icon={faEdit} />
-      </Button>
-      <Button className="mt-5" title="Remove task" onClick={handleRemoveTask}>
-        <Icon icon={faTrashAlt} />
-      </Button>
+  <Card className="task-card d-flex justify-content-between">
+    <div>
+      <h4 class="card-title" name="title">{taskData.name}</h4>
+      <p>{taskData.description}</p>
     </div>
 
-    <h4 class="card-title" name="title">{taskData.name}</h4>
-    <p>{taskData.description}</p>
+    {#if !taskData.archived}
+      <div class="d-flex flex-column">
+        <Button title="Edit task" onClick={handleEditButtonClick}>
+          <Icon icon={faEdit} />
+        </Button>
+        <Button className="mt-5" title="Remove task" onClick={handleRemoveTask}>
+          <Icon icon={faTrashAlt} />
+        </Button>
+        <Button
+          className="mt-5"
+          title="Archive task"
+          onClick={handleArchiveTask}>
+          <Icon icon={faFolder} />
+        </Button>
+      </div>
+    {/if}
   </Card>
 {/if}
