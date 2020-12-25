@@ -9,6 +9,7 @@
   import Routes from "./Routes.svelte";
   import { getAllTasks, saveAllTasks } from "./services/TaskService";
   import { taskStore } from "./store/tasksStore";
+  import { getUnloadEventName } from "./utils/utils";
 
   onMount(() => {
     setPreferredTheme();
@@ -17,7 +18,7 @@
     taskStore.init(allTasks);
   });
 
-  window.addEventListener("beforeunload", () => {
+  window.addEventListener(getUnloadEventName(), () => {
     saveAllTasks($taskStore);
   });
 </script>

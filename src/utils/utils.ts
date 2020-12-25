@@ -25,3 +25,8 @@ export function convertEnumIdentifierToWords(identifier: string): string {
 export function uid(): string {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
+
+export function getUnloadEventName(): string {
+  const isOnIOS = navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i);
+  return isOnIOS ? 'pagehide' : 'beforeunload';
+}
