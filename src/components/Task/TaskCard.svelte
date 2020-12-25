@@ -106,13 +106,13 @@
   </Card>
 {:else}
   <Card className="task-card d-flex justify-content-between">
-    <div>
+    <div class="mr-5">
       <h4 class="card-title" name="title">{taskData.name}</h4>
       <p>{taskData.description}</p>
     </div>
 
     {#if !taskData.archived}
-      <div class="d-flex flex-column">
+      <div class="d-flex flex-column justify-content-center">
         <Button title="Edit task" onClick={handleEditButtonClick}>
           <Icon icon={faEdit} />
         </Button>
